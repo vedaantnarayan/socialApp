@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SocialAppController {
 	
-	@GetMapping("/")
+	//@GetMapping("/")
     public String handler() {
 		return "Sprinklr Social App Is Running ..!!";
     }

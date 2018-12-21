@@ -1,2 +1,7 @@
-/home/vedantn/Project/socialApp/src/main/java/com/sprinklr/socialapp/SocialAppApplication.java
-/home/vedantn/Project/socialApp/src/main/java/com/sprinklr/socialapp/controller/SocialAppController.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserDALImpl.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserDAL.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/SocialAppApplication.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/model/User.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserRepository.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/controller/SocialAppController.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/controller/UserController.java
