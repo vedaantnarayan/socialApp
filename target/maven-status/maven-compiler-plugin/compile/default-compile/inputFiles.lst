@@ -1,7 +1,11 @@
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserDALImpl.java
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserDAL.java
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/SocialAppApplication.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/service/twitter/TwitterService.java
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/model/User.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/config/twitter/TwitterTemplateCreator.java
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/repository/UserRepository.java
-/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/controller/SocialAppController.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/controller/TwitterController.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/config/SocialConfig.java
 /home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/controller/UserController.java
+/home/vedantn/Project/socialapp/src/main/java/com/sprinklr/socialapp/model/Twitter.java
