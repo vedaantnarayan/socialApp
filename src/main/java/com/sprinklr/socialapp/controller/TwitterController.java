@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprinklr.socialapp.model.Twitter;
-import com.sprinklr.socialapp.service.twitter.TwitterService;
+import com.sprinklr.socialapp.model.Feed;
+import com.sprinklr.socialapp.model.TwitterInfo;
+import com.sprinklr.socialapp.service.TwitterService;
 
 @RestController
 public class TwitterController {
@@ -20,9 +21,9 @@ public class TwitterController {
 	private TwitterService twitterService;
 
 	@PostMapping("/tweet")
-	public String tweet(@RequestHeader("User-Name") String userName, @RequestBody Twitter twitter) {
+	public String tweet(@RequestHeader("email") String email, @RequestBody TwitterInfo twitter) {
 		try {
-			twitterService.tweet(userName, twitter.getText());
+			twitterService.tweet(email, twitter.getText());
 		} catch (RuntimeException ex) {
 			throw ex;
 		}
@@ -38,6 +39,17 @@ public class TwitterController {
 			throw ex;
 		}
 		return userTimelineTweetList;
+	}
+	
+	@GetMapping("/twitter/feed")
+	public List<Feed> getTwitterFeed() {
+		List<Feed> twitterFeedList = null;
+		try {
+			twitterFeedList = twitterService.getTwitterFeed();
+		} catch (RuntimeException ex) {
+			throw ex;
+		}
+		return twitterFeedList;
 	}
 
 }

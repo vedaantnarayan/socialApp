@@ -12,9 +12,9 @@ public interface UserDAL {
 
 	User addNewUser(User user);
 
-	Object getAllUserSettings(String userId);
+//	Object getAllUserSettings(String userId);
 
-	String getUserSetting(String userId, String key);
+//	String getUserSetting(String userId, String key);
 
-	String addUserSetting(String userId, String key, String value);
+//	String addUserSetting(String userId, String key, String value);
 }

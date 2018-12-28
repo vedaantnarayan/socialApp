@@ -1,6 +1,6 @@
 package com.sprinklr.socialapp.model;
 
-public class Twitter {
+public class FacebookInfo {
 
 	private String text;
 

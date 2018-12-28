@@ -36,7 +36,7 @@ public class UserDALImpl implements UserDAL {
 		return user;
 	}
 
-	@Override
+	/*@Override
 	public Object getAllUserSettings(String userId) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").is(userId));
@@ -65,5 +65,5 @@ public class UserDALImpl implements UserDAL {
 		} else {
 			return "User not found.";
 		}
-	}
+	}*/
 }

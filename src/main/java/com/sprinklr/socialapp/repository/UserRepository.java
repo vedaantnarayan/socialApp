@@ -7,4 +7,6 @@ import com.sprinklr.socialapp.model.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
+
+	User findByEmail(String email);
 }
