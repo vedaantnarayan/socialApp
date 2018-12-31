@@ -1,35 +1,38 @@
 package com.sprinklr.socialapp.config;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
-import com.sprinklr.socialapp.service.TwitterService;
+import com.sprinklr.socialapp.service.IFacebookService;
+import com.sprinklr.socialapp.service.ITwitterService;
 
 @Component
 public class SocialAppScheduler {
 
 	@Autowired
-	private TwitterService twitterService;
+	private ITwitterService twitterService;
 
-	//@Scheduled(cron = "0/20 * * * * ?")
-	public void getTweets() {
+	@Autowired
+	private IFacebookService facebookService;
 
-		List<Tweet> tweetList=twitterService.getPublicTimeline("app1");
-				
+//	@Scheduled(cron = "0 * * ? * *")
+	public void getSocialFeed() {
+
+		System.out.println("=========== Synchronizing Twitter Feed Started ============");
+
+		twitterService.getPublicTimeline();
+
+		System.out.println("=========== Synchronizing Twitter Feed Ended ============");
+
+		System.out.println("=========== Synchronizing Facebook Feed Started ============");
+
+	//	facebookService.getPublicTimeline();
+
+		System.out.println("=========== Synchronizing Facebook Feed Ended ============");
+
 		System.out.println("Schedular Executed task at - " + System.currentTimeMillis() / 1000);
-		
-		for (Tweet tweet : tweetList) {
-			String json = new Gson().toJson(tweet);
-			System.out.println("#################################################################################################");
-			System.out.println(json);
-			System.out.println("#################################################################################################");
 
-		}
 	}
 
 }

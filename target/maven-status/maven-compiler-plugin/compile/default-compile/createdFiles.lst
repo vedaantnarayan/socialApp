@@ -1,5 +1,5 @@
 com/sprinklr/socialapp/SocialAppApplication.class
 com/sprinklr/socialapp/repository/UserRepository.class
 com/sprinklr/socialapp/repository/UserDAL.class
-com/sprinklr/socialapp/controller/UserController.class
 com/sprinklr/socialapp/model/User.class
+com/sprinklr/socialapp/controller/UserController.class

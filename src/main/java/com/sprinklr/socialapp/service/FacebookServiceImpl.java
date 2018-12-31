@@ -22,7 +22,7 @@ import com.sprinklr.socialapp.repository.UserRepository;
 import com.sprinklr.socialapp.utility.ApplicationConstant;
 
 @Service
-public class FacebookService {
+public class FacebookServiceImpl implements IFacebookService {
 
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -49,12 +49,20 @@ public class FacebookService {
 		return null;
 	}
 
-	public String doPost(String userName, String postText) {
+	public void doPost(String email, String postText) {
 		try {
+			
 
-		//	getFacebookTemplate(userName).feedOperations().updateStatus(postText);
-			saveFBPost(postText, null);
-			return postText;
+			User user = userRepository.findByEmail(email);
+			if (user != null && user.getUserTokenDetails() != null && !user.getUserTokenDetails().isEmpty()) {
+				for (UserTokenDetails userTokenDetails : user.getUserTokenDetails()) {
+					if (ApplicationConstant.SocialNetworkType.FACEBOOK.name()
+							.equalsIgnoreCase(userTokenDetails.getSource())) {
+						getFacebookTemplate(userTokenDetails).feedOperations().updateStatus(postText);
+						saveFBPost(postText, null);
+					}
+				}
+			}
 		} catch (RuntimeException ex) {
 			throw ex;
 		}

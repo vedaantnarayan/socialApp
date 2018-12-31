@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.twitter.api.Tweet;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,20 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sprinklr.socialapp.model.FacebookInfo;
 import com.sprinklr.socialapp.model.Feed;
-import com.sprinklr.socialapp.model.TwitterInfo;
-import com.sprinklr.socialapp.service.FacebookService;
-import com.sprinklr.socialapp.service.TwitterService;
+import com.sprinklr.socialapp.service.IFacebookService;
 
 @RestController
 public class FacebookController {
 
 	@Autowired
-	private FacebookService facebookService;
+	private IFacebookService facebookService;
 
 	@PostMapping("/fb/post")
-	public String doPost(@RequestHeader("User-Name") String userName, @RequestBody FacebookInfo facebookInfo) {
+	public String doPost(@RequestHeader("email") String email, @RequestBody FacebookInfo facebookInfo) {
 		try {
-			facebookService.doPost(userName, facebookInfo.getText());
+			facebookService.doPost(email, facebookInfo.getText());
 		} catch (RuntimeException ex) {
 			throw ex;
 		}
@@ -35,9 +32,9 @@ public class FacebookController {
 	}
 
 	@GetMapping("/fb/userProfile")
-	public User getUserProfile(@RequestHeader("User-Name") String userName) {
+	public User getUserProfile(@RequestHeader("email") String email) {
 		try {
-		//	return facebookService.getUserProfile(userName);
+		//	return facebookService.getUserProfile(email);
 		} catch (RuntimeException ex) {
 			throw ex;
 		}

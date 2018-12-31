@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sprinklr.socialapp.model.Feed;
 import com.sprinklr.socialapp.model.TwitterInfo;
-import com.sprinklr.socialapp.service.TwitterService;
+import com.sprinklr.socialapp.service.ITwitterService;
 
 @RestController
 public class TwitterController {
 
 	@Autowired
-	private TwitterService twitterService;
+	private ITwitterService twitterService;
 
 	@PostMapping("/tweet")
 	public String tweet(@RequestHeader("email") String email, @RequestBody TwitterInfo twitter) {
@@ -31,10 +31,10 @@ public class TwitterController {
 	}
 
 	@GetMapping("/userTimeline")
-	public List<Tweet> getPublicTimeline(@RequestHeader("User-Name") String userName) {
+	public List<Tweet> getPublicTimeline() {
 		List<Tweet> userTimelineTweetList = null;
 		try {
-			userTimelineTweetList = twitterService.getPublicTimeline(userName);
+	//		userTimelineTweetList = twitterService.getPublicTimeline();
 		} catch (RuntimeException ex) {
 			throw ex;
 		}
