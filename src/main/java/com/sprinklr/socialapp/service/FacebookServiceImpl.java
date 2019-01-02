@@ -20,7 +20,7 @@ import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.sprinklr.socialapp.config.SocialNetworkAdapter;
+import com.sprinklr.socialapp.config.IFacebookConnectionFactory;
 import com.sprinklr.socialapp.model.Feed;
 import com.sprinklr.socialapp.model.User;
 import com.sprinklr.socialapp.model.UserTokenDetails;
@@ -33,7 +33,7 @@ public class FacebookServiceImpl implements IFacebookService {
 
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 	@Autowired
-	private SocialNetworkAdapter socialNetworkAdapter;
+	private IFacebookConnectionFactory facebookConnectionFactory;
 
 	@Autowired
 	private FeedRepository feedRepository;
@@ -42,7 +42,7 @@ public class FacebookServiceImpl implements IFacebookService {
 	private UserRepository userRepository;
 
 	public Facebook getFacebookTemplate(UserTokenDetails userTokenDetails) {
-		return socialNetworkAdapter.getFacebookTemplate(userTokenDetails);
+		return facebookConnectionFactory.getFacebookTemplate(userTokenDetails);
 
 	}
 

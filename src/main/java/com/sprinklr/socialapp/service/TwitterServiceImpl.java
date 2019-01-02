@@ -21,7 +21,7 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.sprinklr.socialapp.config.SocialNetworkAdapter;
+import com.sprinklr.socialapp.config.ITwitterConnectionFactory;
 import com.sprinklr.socialapp.model.Feed;
 import com.sprinklr.socialapp.model.User;
 import com.sprinklr.socialapp.model.UserTokenDetails;
@@ -33,7 +33,7 @@ import com.sprinklr.socialapp.utility.ApplicationConstant;
 public class TwitterServiceImpl implements ITwitterService {
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 	@Autowired
-	private SocialNetworkAdapter socialNetworkAdapter;
+	private ITwitterConnectionFactory twitterConnectionFactory;
 
 	@Autowired
 	private FeedRepository feedRepository;
@@ -127,7 +127,7 @@ public class TwitterServiceImpl implements ITwitterService {
 	}
 
 	public Twitter getTwitterTemplate(UserTokenDetails userTokenDetails) {
-		return socialNetworkAdapter.getTwitterTemplate(userTokenDetails);
+		return twitterConnectionFactory.getTwitterTemplate(userTokenDetails);
 
 	}
 

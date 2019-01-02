@@ -20,7 +20,7 @@ public class SocialAppScheduler {
 	@Autowired
 	private IFacebookService facebookService;
 
-//	@Scheduled(cron = "0 * * ? * *")
+	//@Scheduled(cron = "0 * * ? * *")
 	public void getSocialFeed() {
 
 		LOGGER.info("=========== Synchronizing Twitter Feed Started ============");
@@ -31,7 +31,7 @@ public class SocialAppScheduler {
 
 		LOGGER.info("=========== Synchronizing Facebook Feed Started ============");
 
-	//	facebookService.getPublicTimeline();
+		facebookService.getPublicTimeline();
 
 		LOGGER.info("=========== Synchronizing Facebook Feed Ended ============");
 
