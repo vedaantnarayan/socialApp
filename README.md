@@ -96,6 +96,19 @@ To Get All Facebook Posts :
 
 ##
 
+## Important Classes
+
+```
+* SocialAppScheduler  : Responsible to invoke Scheduler as of now we have set it to every minute for syncing data from different social sites.
+* FacebookConnectionFactory : Responsible for establishing connection with facebook using acess token and secret. 
+* FacebookController : Meant for exposing facebook related api to end user ,if any.
+* FacebookServiceImpl : Service layer for Facebook api.
+* TwitterConnectionFactory : Responsible for establishing connection with Twiiter using acess token and secret
+* TwitterController : Meant for exposing Twitter related api to end user ,if any.
+* TwitterServiceImpl : Service layer for Twitter api.
+
+``` 
+
 ## Note 
 On Create User API's input accessToken and accessTokenSecret has been changed for security purpose.
 
