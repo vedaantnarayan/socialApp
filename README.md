@@ -96,4 +96,8 @@ To Get All Facebook Posts :
 
 ##
 
+## Note 
+On Create User API's input accessToken and accessTokenSecret has been changed for security purpose.
+
+##
 
