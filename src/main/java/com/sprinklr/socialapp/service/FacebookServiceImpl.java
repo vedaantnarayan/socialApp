@@ -17,16 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.Post;
-import org.springframework.social.twitter.api.Tweet;
-
-import com.sprinklr.socialapp.model.User;
-import com.sprinklr.socialapp.model.UserTokenDetails;
-
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.sprinklr.socialapp.config.SocialNetworkAdapter;
 import com.sprinklr.socialapp.model.Feed;
+import com.sprinklr.socialapp.model.User;
+import com.sprinklr.socialapp.model.UserTokenDetails;
 import com.sprinklr.socialapp.repository.FeedRepository;
 import com.sprinklr.socialapp.repository.UserRepository;
 import com.sprinklr.socialapp.utility.ApplicationConstant;

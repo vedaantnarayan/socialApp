@@ -1,7 +1,6 @@
 package com.sprinklr.socialapp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sprinklr.socialapp.model.User;
 import com.sprinklr.socialapp.repository.UserDAL;
 import com.sprinklr.socialapp.repository.UserRepository;
-
 
 @RestController
 @RequestMapping(value = "/")
@@ -49,18 +47,15 @@ public class UserController {
 		return userRepository.findOne(userId);
 	}
 
-	/*@RequestMapping(value = "/settings/{userId}", method = RequestMethod.GET)
-	public Object getAllUserSettings(@PathVariable String userId) {
-		User user = userRepository.findOne(userId);
-		if (user != null) {
-			return userDAL.getAllUserSettings(userId);
-		} else {
-			return "User not found.";
-		}
-	}
-
-	@RequestMapping(value = "/settings/{userId}/{key}", method = RequestMethod.GET)
-	public String getUserSetting(@PathVariable String userId, @PathVariable String key) {
-		return userDAL.getUserSetting(userId, key);
-	}*/
+	/*
+	 * @RequestMapping(value = "/settings/{userId}", method = RequestMethod.GET)
+	 * public Object getAllUserSettings(@PathVariable String userId) { User user =
+	 * userRepository.findOne(userId); if (user != null) { return
+	 * userDAL.getAllUserSettings(userId); } else { return "User not found."; } }
+	 * 
+	 * @RequestMapping(value = "/settings/{userId}/{key}", method =
+	 * RequestMethod.GET) public String getUserSetting(@PathVariable String
+	 * userId, @PathVariable String key) { return userDAL.getUserSetting(userId,
+	 * key); }
+	 */
 }
