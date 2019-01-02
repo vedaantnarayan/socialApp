@@ -1,5 +1,7 @@
 package com.sprinklr.socialapp.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.twitter.api.Twitter;
@@ -11,15 +13,20 @@ import com.sprinklr.socialapp.model.UserTokenDetails;
 
 @Component
 public class SocialNetworkAdapter {
+	
+	@Autowired
+	private Environment env;
 
 	public Twitter getTwitterTemplate(UserTokenDetails userTokenDetails) {
-		Preconditions.checkNotNull(userTokenDetails.getAppId());
-		Preconditions.checkNotNull(userTokenDetails.getAppSecret());
+		String appId=env.getProperty("app1.twitter.app-id");
+		String appSecret=env.getProperty("app1.twitter.app-secret");
+		Preconditions.checkNotNull(appId);
+		Preconditions.checkNotNull(appSecret);
 		Preconditions.checkNotNull(userTokenDetails.getAccessToken());
 		Preconditions.checkNotNull(userTokenDetails.getAccessTokenSecret());
 
-		TwitterTemplate twitterTemplate = new TwitterTemplate(userTokenDetails.getAppId(),
-				userTokenDetails.getAppSecret(), userTokenDetails.getAccessToken(),
+		TwitterTemplate twitterTemplate = new TwitterTemplate(appId,
+				appSecret, userTokenDetails.getAccessToken(),
 				userTokenDetails.getAccessTokenSecret());
 		return twitterTemplate;
 	}

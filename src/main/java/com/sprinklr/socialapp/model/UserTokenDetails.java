@@ -3,8 +3,6 @@ package com.sprinklr.socialapp.model;
 public class UserTokenDetails {
 
 	private String source;
-	private String appId;
-	private String appSecret;
 	private String accessToken;
 	private String accessTokenSecret;
 	private String userName;
@@ -16,22 +14,6 @@ public class UserTokenDetails {
 
 	public void setSource(String source) {
 		this.source = source;
-	}
-
-	public String getAppId() {
-		return appId;
-	}
-
-	public void setAppId(String appId) {
-		this.appId = appId;
-	}
-
-	public String getAppSecret() {
-		return appSecret;
-	}
-
-	public void setAppSecret(String appSecret) {
-		this.appSecret = appSecret;
 	}
 
 	public String getAccessToken() {

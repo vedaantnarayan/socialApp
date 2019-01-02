@@ -1,5 +1,7 @@
 package com.sprinklr.socialapp.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,8 @@ import com.sprinklr.socialapp.service.ITwitterService;
 @Component
 public class SocialAppScheduler {
 
+	private Logger LOGGER = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private ITwitterService twitterService;
 
@@ -19,19 +23,19 @@ public class SocialAppScheduler {
 //	@Scheduled(cron = "0 * * ? * *")
 	public void getSocialFeed() {
 
-		System.out.println("=========== Synchronizing Twitter Feed Started ============");
+		LOGGER.info("=========== Synchronizing Twitter Feed Started ============");
 
 		twitterService.getPublicTimeline();
 
-		System.out.println("=========== Synchronizing Twitter Feed Ended ============");
+		LOGGER.info("=========== Synchronizing Twitter Feed Ended ============");
 
-		System.out.println("=========== Synchronizing Facebook Feed Started ============");
+		LOGGER.info("=========== Synchronizing Facebook Feed Started ============");
 
 	//	facebookService.getPublicTimeline();
 
-		System.out.println("=========== Synchronizing Facebook Feed Ended ============");
+		LOGGER.info("=========== Synchronizing Facebook Feed Ended ============");
 
-		System.out.println("Schedular Executed task at - " + System.currentTimeMillis() / 1000);
+		LOGGER.info("Schedular Executed task at - " + System.currentTimeMillis() / 1000);
 
 	}
 

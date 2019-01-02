@@ -1,7 +1,15 @@
 package com.sprinklr.socialapp.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.twitter.api.Tweet;
+
 import com.sprinklr.socialapp.model.User;
 import com.sprinklr.socialapp.model.UserTokenDetails;
 
@@ -42,7 +52,8 @@ public class FacebookServiceImpl implements IFacebookService {
 	public User getUserProfile(String userName) {
 		try {
 
-		//	return getFacebookTemplate(userName).fetchObject("me", User.class, ApplicationConstant.FIELDS);
+			// return getFacebookTemplate(userName).fetchObject("me", User.class,
+			// ApplicationConstant.FIELDS);
 		} catch (RuntimeException ex) {
 			throw ex;
 		}
@@ -51,7 +62,6 @@ public class FacebookServiceImpl implements IFacebookService {
 
 	public void doPost(String email, String postText) {
 		try {
-			
 
 			User user = userRepository.findByEmail(email);
 			if (user != null && user.getUserTokenDetails() != null && !user.getUserTokenDetails().isEmpty()) {
@@ -74,21 +84,38 @@ public class FacebookServiceImpl implements IFacebookService {
 		// TODO Post FB Post will get persist into mongo.
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<Post> getPublicTimeline() {
 		List<Post> post = null;
 		try {
 
 			List<User> userList = userRepository.findAll();
 			if (userList != null && !userList.isEmpty()) {
+				ExecutorService es = Executors.newFixedThreadPool(5);
+				Map<String, Future<List<Post>>> fbMap = new HashMap<>();
 				for (User user : userList) {
 					if (user.getUserTokenDetails() != null && !user.getUserTokenDetails().isEmpty()) {
 						for (UserTokenDetails userTokenDetails : user.getUserTokenDetails()) {
 							if (ApplicationConstant.SocialNetworkType.FACEBOOK.name()
 									.equalsIgnoreCase(userTokenDetails.getSource())) {
-								post = getFacebookTemplate(userTokenDetails).feedOperations().getFeed();
-								persistFBPost(post, HttpMethod.GET.name(),user.getUserId());
+
+								Future<List<Post>> future = es.submit(new Callable() {
+									public List<Post> call() throws Exception {
+										return getFacebookTemplate(userTokenDetails).feedOperations().getFeed();
+									}
+								});
+								fbMap.put(user.getUserId(), future);
 							}
 						}
+					}
+				}
+				es.shutdown();
+				for (Entry<String, Future<List<Post>>> futureFbMap : fbMap.entrySet()) {
+					try {
+						persistFBPost(futureFbMap.getValue().get(), HttpMethod.GET.name(), futureFbMap.getKey());
+					} catch (InterruptedException | ExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
@@ -98,7 +125,7 @@ public class FacebookServiceImpl implements IFacebookService {
 		return post;
 	}
 
-	private void persistFBPost(List<Post> postList, String feedType,String userId) {
+	private void persistFBPost(List<Post> postList, String feedType, String userId) {
 
 		try {
 			if (postList != null && !postList.isEmpty()) {
